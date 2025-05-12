@@ -1526,7 +1526,7 @@
                         const latitude = position.coords.latitude;
                         const longitude = position.coords.longitude;
                         // Display coordinates
-                        locationInput.value = `Lat: ${latitude.toFixed(6)}, Lon: ${longitude.toFixed(6)}`;
+                        locationInput.value = `: ${latitude.toFixed(6)}, : ${longitude.toFixed(6)}`;
                         locationInput.readOnly = true; // Keep readonly
                         locationInput.style.backgroundColor = '#e9ecef'; // Style to look disabled but filled
                         locationError.style.display = 'none'; // Hide error on success
