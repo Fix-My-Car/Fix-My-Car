@@ -101,9 +101,12 @@
             --sticky-call-bg: #023E8A;
             --sticky-call-hover-bg: #001f4d;
             --sticky-call-text: white;
-            --sticky-request-bg: #FFA500; /* Orange for Request Service */
-            --sticky-request-hover-bg: #FF8C00; /* Darker Orange */
-            --sticky-request-text: #1a202c; /* Dark text for orange button */
+            --sticky-request-bg: #FFA500;
+            /* Orange for Request Service */
+            --sticky-request-hover-bg: #FF8C00;
+            /* Darker Orange */
+            --sticky-request-text: #1a202c;
+            /* Dark text for orange button */
         }
 
         /* For WebKit browsers (Chrome, Safari, newer Edge) - Hide scrollbar */
@@ -552,6 +555,64 @@
         }
 
 
+        /* Style for the language selector - Desktop position */
+        .language-selector-desktop {
+            margin-left: 1rem;
+        }
+
+        .language-selector-desktop select {
+            /* Ensure language selector background is visible against blue navbar */
+            background-color: rgba(255, 255, 255, 0.2);
+            /* Slightly transparent white */
+            color: black;
+            /* Set text color to black */
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            /* Lighter border */
+            border-radius: 0.375rem;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+        }
+
+        .language-selector-desktop select:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 2px rgba(135, 206, 250, 0.5);
+        }
+
+        /* Style for the language selector - Mobile position */
+        .language-selector-mobile {
+            position: absolute;
+            /* Positioned relative to the nearest positioned ancestor (body) */
+            z-index: 40;
+            /* Below header, below slider */
+            /* Initial positioning will be set by JavaScript */
+            display: none;
+            /* Hidden by default, shown via JS on mobile */
+            /* Add some margin/padding around the select element itself */
+            padding: 4px;
+            /* Small padding around the dropdown */
+            max-width: 100%;
+            /* Ensure language selector doesn't cause overflow */
+        }
+
+        .language-selector-mobile select {
+            background-color: rgba(255, 255, 255, 0.9);
+            /* Slightly opaque white */
+            color: black;
+            /* Set text color to black */
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            /* Darker border */
+            border-radius: 0.375rem;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
         /* Style for service cards with background images */
         .service-card {
             background-color: var(--card-bg-color);
@@ -622,19 +683,19 @@
         }
 
         .service-card[data-service-type="car-towing"] {
-            background-image: url('images/tow.png');
+            background-image: url('https://placehold.co/600x400/023E8A/ffffff?text=Car+Towing');
         }
 
         .service-card[data-service-type="brake-repair"] {
-            background-image: url('images/brakes.png');
+            background-image: url('https://placehold.co/600x400/005f99/ffffff?text=Brake+Service');
         }
 
         .service-card[data-service-type="ac-heating"] {
-            background-image: url('images/A.C.png');
+            background-image: url('https://placehold.co/600x400/0077cc/ffffff?text=AC+Heating');
         }
 
         .service-card[data-service-type="oil-fluid-check"] {
-            background-image: url('images/oil.png');
+            background-image: url('https://placehold.co/600x400/ff8c00/ffffff?text=Oil+Change');
         }
 
         .service-card .p-3 svg {
@@ -985,7 +1046,8 @@
             }
 
             /* Hide desktop navigation on mobile */
-            nav {
+            nav,
+            .language-selector-desktop {
                 display: none;
             }
 
@@ -1008,6 +1070,18 @@
                 margin-bottom: 0;
                 order: 2;
                 /* Place title in the middle */
+            }
+
+            /* Position mobile language selector */
+            .language-selector-mobile {
+                display: block;
+                /* Show on mobile */
+                position: absolute;
+                /* Position set by JS */
+                /* Initial positioning will be set by JavaScript */
+                /* The JS function will calculate top and right based on the hamburger button */
+                max-width: 100%;
+                /* Ensure mobile language selector doesn't cause overflow */
             }
 
             #hero h2 {
@@ -1278,130 +1352,42 @@
             display: block !important;
             visibility: visible !important;
         }
-
-        /* Styles for the new AI Assistant section */
-        #ai-assistant {
-            background-color: var(--background-light);
-            padding: 4rem 1rem;
-            text-align: center;
-        }
-
-        #ai-assistant .container {
-            max-width: 800px;
-        }
-
-        #ai-assistant textarea {
-            width: 100%;
-            min-height: 150px;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            border: 1px solid var(--border-color);
-            background-color: var(--surface-color);
-            color: var(--text-color);
-            resize: vertical;
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        #ai-assistant button {
-            background-color: var(--primary-dark);
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 9999px;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-            cursor: pointer;
-        }
-
-        #ai-assistant button:hover {
-            background-color: var(--darker-blue);
-        }
-
-        #ai-assistant .loader {
-            border: 4px solid #f3f3f3;
-            /* Light grey */
-            border-top: 4px solid var(--primary-dark);
-            /* Blue */
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 1.5rem auto;
-            display: none;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        #ai-assistant .response-area {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background-color: var(--card-bg-color);
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            text-align: left;
-            min-height: 50px;
-            color: var(--text-color);
-        }
-
-        #ai-assistant .response-area h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
-        }
-
-        #ai-assistant .response-area p,
-        #ai-assistant .response-area ul {
-            margin-bottom: 0.75rem;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        #ai-assistant .response-area ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
-        }
-
-        #ai-assistant .response-area li {
-            margin-bottom: 0.5rem;
-        }
-
-        #ai-assistant .disclaimer-text {
-            font-size: 0.8rem;
-            color: #6b7280;
-            /* Tailwind gray-500 */
-            margin-top: 1.5rem;
-        }
     </style>
 </head>
 
 <body class="bg-gray-100">
     <header class="text-white py-3 shadow-lg">
         <div class="container mx-auto flex items-center justify-between px-4">
-            <!-- Logo -->
-            <a href="#" class="flex items-center">
-                <img src="images/yvc.png" alt="Your Vehicles Care Logo" class="h-12 w-auto"> <!-- Adjust h-12 to your desired height -->
-            </a>
+            <div class="site-title-container">
+                <span class="text-2xl font-bold tracking-tight" data-translate="siteTitle">Your Vehicles Care</span>
+            </div>
 
             <nav class="hidden md:flex flex-wrap">
-                <a href="#hero" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2">Home</a>
-                <a href="#services" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2">Services</a>
-                <a href="#ai-assistant" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2">AI Assistant</a>
-                <a href="#inspection" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2">Inspection Charges</a>
-                <a href="#team" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2">Our
+                <a href="#hero" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2"
+                    data-translate="navHome">Home</a>
+                <a href="#services" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2"
+                    data-translate="navServices">Services</a>
+                <a href="#inspection" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2"
+                    data-translate="navInspection">Inspection Charges</a>
+                <a href="#team" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2"
+                    data-translate="navTeam">Our
                     Team</a>
-                <a href="#join-us" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2">Join Our Team</a>
-                <a href="#contact" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2">Contact</a>
-                <a href="terms.html" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2">Terms</a>
+                <a href="#join-us" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2"
+                    data-translate="navJoinUs">Join Our Team</a>
+                <a href="#contact" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2"
+                    data-translate="navContact">Contact</a>
+                <a href="terms.html" class="hover:text-blue-400 transition duration-300 mx-1 md:mx-2"
+                    data-translate="navTerms">Terms</a>
             </nav>
+
+            <div class="language-selector-desktop hidden md:block">
+                <select id="language-select-desktop" aria-label="Select Language" class="text-sm">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="gu">ગુજરાતી</option>
+                    <option value="mr">मराठी</option>
+                </select>
+            </div>
 
             <div class="flex items-center mobile-menu-container">
                 <button class="mobile-menu-button focus:outline-none" aria-label="Toggle Mobile Menu">
@@ -1411,15 +1397,24 @@
         </div>
     </header>
 
+    <div class="language-selector-mobile">
+        <select id="language-select-mobile" aria-label="Select Language" class="text-sm">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="gu">ગુજરાતી</option>
+            <option value="mr">मराठी</option>
+        </select>
+    </div>
+
+
     <div class="mobile-nav-slider">
-        <a href="#hero">Home</a>
-        <a href="#services">Services</a>
-        <a href="#ai-assistant">AI Assistant</a>
-        <a href="#inspection">Inspection Charges</a>
-        <a href="#team">Our Team</a>
-        <a href="#join-us">Join Our Team</a>
-        <a href="#contact">Contact</a>
-        <a href="terms.html">Terms</a>
+        <a href="#hero" data-translate="navHome">Home</a>
+        <a href="#services" data-translate="navServices">Services</a>
+        <a href="#inspection" data-translate="navInspection">Inspection Charges</a>
+        <a href="#team" data-translate="navTeam">Our Team</a>
+        <a href="#join-us" data-translate="navJoinUs">Join Our Team</a>
+        <a href="#contact" data-translate="navContact">Contact</a>
+        <a href="terms.html" data-translate="navTerms">Terms</a>
     </div>
 
     <div class="mobile-nav-overlay"></div>
@@ -1429,35 +1424,39 @@
         data-aos="fade-up">
         <div class="container mx-auto max-w-6xl">
             <div class="max-w-3xl mx-auto mb-8 md:mb-10 relative z-20">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight text-[#278cc9]">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight --text-color red"
+                    data-translate="heroHeading">
                     Expert On-Demand Vehicle
                     Solutions, Delivered to You</h2>
-                <p class="text-lg md:text-xl mb-8 md:mb-10 opacity-90">Reliable roadside
+                <p class="text-lg md:text-xl mb-8 md:mb-10 opacity-90" data-translate="heroSubheading">Reliable roadside
                     assistance and
                     mobile
                     mechanic services. We bring the
                     workshop to your location for prompt and efficient repairs.</p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                     <button onclick="window.location.href='#services'"
-                        class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-blue-800 text-lg w-full sm:w-auto">
+                        class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-blue-800 text-lg w-full sm:w-auto"
+                        data-translate="heroViewServicesBtn">
                         View Services
                     </button>
                     <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                        class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-blue-800 text-lg w-full sm:w-auto">
+                        class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-blue-800 text-lg w-full sm:w-auto"
+                        data-translate="heroRequestServiceBtn">
                         Request Service
                     </a>
                 </div>
                 <div class="section-contact-buttons mt-8 md:mt-10">
                     <a href="tel:+919303931226" class="button call-btn">
                         <i class="fas fa-phone-alt text-lg md:text-xl mr-2"></i>
-                        <span class="font-semibold">Call Now</span>
+                        <span class="font-semibold" data-translate="callNowBtn">Call Now</span>
                     </a>
                     <a href="https://wa.me/919303931226" target="_blank" class="button whatsapp-btn">
                         <i class="fab fa-whatsapp text-lg md:text-xl mr-2"></i>
-                        <span class="font-semibold">WhatsApp</span>
+                        <span class="font-semibold" data-translate="whatsappBtn">WhatsApp</span>
                     </a>
                 </div>
-                <p class="text-xs md:text-sm opacity-80 mt-3 md:mt-4 text-center">Click to directly call or
+                <p class="text-xs md:text-sm opacity-80 mt-3 md:mt-4 text-center"
+                    data-translate="contactClickInstruction">Click to directly call or
                     message
                     us.</p>
             </div>
@@ -1475,10 +1474,10 @@
 
     <section id="services" class="py-16 md:py-20 px-4 text-center">
         <div class="container mx-auto max-w-6xl">
-            <h2 class="section-title" data-aos="fade-up">Our Professional Services</h2>
+            <h2 class="section-title" data-aos="fade-up" data-translate="servicesHeading">Our Professional Services</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
                 <!-- Service Card 1: Jump Start -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="100" data-service-type="jump-start">
+                <div class="service-card" data-aos="fade-up" data-service-type="jump-start">
                     <div class="p-3 bg-opacity-20 bg-white text-white rounded-full mb-4 md:mb-6 inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -1486,16 +1485,17 @@
                                 d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4" data-translate="serviceJumpStartTitle">
                         Jump Start</h3>
-                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow">Rapid
+                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow" data-translate="serviceJumpStartDesc">Rapid
                         assistance for dead batteries to get your vehicle running again quickly and safely.</p>
                     <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base">Request Service</a>
+                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base"
+                        data-translate="requestServiceBtn">Request Service</a>
                 </div>
 
                 <!-- Service Card 2: Flat Tire Change -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="200" data-service-type="flat-tire">
+                <div class="service-card" data-aos="fade-up" data-service-type="flat-tire">
                     <div class="p-3 bg-opacity-20 bg-white text-white rounded-full mb-4 md:mb-6 inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -1503,17 +1503,18 @@
                                 d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4" data-translate="serviceFlatTireTitle">
                         Flat Tire Change</h3>
-                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow">
+                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow" data-translate="serviceFlatTireDesc">
                         Professional and safe replacement of your flat or damaged tire with your spare on location.
                     </p>
                     <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base">Request Service</a>
+                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base"
+                        data-translate="requestServiceBtn">Request Service</a>
                 </div>
 
                 <!-- Service Card 3: Emergency Fuel Delivery -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="300" data-service-type="emergency-fuel">
+                <div class="service-card" data-aos="fade-up" data-service-type="emergency-fuel">
                     <div class="p-3 bg-opacity-20 bg-white text-white rounded-full mb-4 md:mb-6 inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -1521,17 +1522,19 @@
                                 d="M9 3V2m6 1V2m-6 9H9m6 0h-3m9 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4"
+                        data-translate="serviceFuelDeliveryTitle">
                         Emergency Fuel Delivery</h3>
-                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow">
+                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow" data-translate="serviceFuelDeliveryDesc">
                         Running on empty? We deliver fuel directly to your location to get you to the nearest station.
                     </p>
                     <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base">Request Service</a>
+                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base"
+                        data-translate="requestServiceBtn">Request Service</a>
                 </div>
 
                 <!-- Service Card 4: Engine Diagnostics -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="400"
+                <div class="service-card" data-aos="fade-up"
                     data-service-type="engine-diagnostics">
                     <div class="p-3 bg-opacity-20 bg-white text-white rounded-full mb-4 md:mb-6 inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
@@ -1541,17 +1544,18 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4" data-translate="serviceDiagnosticsTitle">
                         Engine Diagnostics</h3>
-                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow">
+                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow" data-translate="serviceDiagnosticsDesc">
                         Utilizing advanced tools to accurately diagnose check engine lights and other performance issues
                         on the spot.</p>
                     <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base">Request Service</a>
+                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base"
+                        data-translate="requestServiceBtn">Request Service</a>
                 </div>
 
                 <!-- Service Card 5: Battery Replacement -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="500"
+                <div class="service-card" data-aos="fade-up"
                     data-service-type="battery-replacement">
                     <div class="p-3 bg-opacity-20 bg-white text-white rounded-full mb-4 md:mb-6 inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
@@ -1560,16 +1564,17 @@
                                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4" data-translate="serviceBatteryTitle">
                         Battery Replacement</h3>
-                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow">Supply
+                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow" data-translate="serviceBatteryDesc">Supply
                         and installation of high-quality batteries suitable for your vehicle's specifications.</p>
                     <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base">Request Service</a>
+                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base"
+                        data-translate="requestServiceBtn">Request Service</a>
                 </div>
 
                 <!-- Service Card 6: Minor Repairs & Checks -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="600" data-service-type="minor-repairs">
+                <div class="service-card" data-aos="fade-up" data-service-type="minor-repairs">
                     <div class="p-3 bg-opacity-20 bg-white text-white rounded-full mb-4 md:mb-6 inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -1579,17 +1584,19 @@
                                 d="M4.055 11H13v9.945A9.001 9.001 0 014.055 11z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4"
+                        data-translate="serviceMinorRepairsTitle">
                         Minor Repairs & Checks</h3>
-                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow">
+                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow" data-translate="serviceMinorRepairsDesc">
                         Addressing common issues like belt replacements, fluid top-offs, filter changes, and basic
                         inspections.</p>
                     <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base">Request Service</a>
+                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base"
+                        data-translate="requestServiceBtn">Request Service</a>
                 </div>
 
                 <!-- Service Card 7: Car Towing -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="700" data-service-type="car-towing">
+                <div class="service-card" data-aos="fade-up" data-service-type="car-towing">
                     <div class="p-3 bg-opacity-20 bg-white text-white rounded-full mb-4 md:mb-6 inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -1597,17 +1604,18 @@
                                 d="M9 19V6l12-3v13M3 19h15a2 2 0 002-2V5a2 2 0 00-2-2H3a2 2 0 00-2 2v12a2 2 0 002 2zM3 19l6-2m0 2l6-2m-6-2v-4"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4" data-translate="serviceCarTowingTitle">
                         Car Towing</h3>
-                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow">
+                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow" data-translate="serviceCarTowingDesc">
                         Reliable towing services for breakdowns, accidents, or transportation to a repair shop.
                     </p>
                     <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base">Request Service</a>
+                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base"
+                        data-translate="requestServiceBtn">Request Service</a>
                 </div>
 
                 <!-- Service Card 8: Brake System Inspection & Repair -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="800" data-service-type="brake-repair">
+                <div class="service-card" data-aos="fade-up" data-service-type="brake-repair">
                     <div class="p-3 bg-opacity-20 bg-white text-white rounded-full mb-4 md:mb-6 inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -1616,17 +1624,19 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4"
+                        data-translate="serviceBrakeRepairTitle">
                         Brake System Repair</h3>
-                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow">
+                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow" data-translate="serviceBrakeRepairDesc">
                         Thorough inspection and repair of brake pads, rotors, calipers, and fluid for optimal stopping
                         power.</p>
                     <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base">Request Service</a>
+                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base"
+                        data-translate="requestServiceBtn">Request Service</a>
                 </div>
 
                 <!-- Service Card 9: A/C & Heating Service -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="900" data-service-type="ac-heating">
+                <div class="service-card" data-aos="fade-up" data-service-type="ac-heating">
                     <div class="p-3 bg-opacity-20 bg-white text-white rounded-full mb-4 md:mb-6 inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -1635,17 +1645,18 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4" data-translate="serviceACHeatingTitle">
                         A/C & Heating Service</h3>
-                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow">
+                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow" data-translate="serviceACHeatingDesc">
                         Recharge, repair, and maintenance of your vehicle's air conditioning and heating systems for
                         comfort.</p>
                     <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base">Request Service</a>
+                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base"
+                        data-translate="requestServiceBtn">Request Service</a>
                 </div>
 
                 <!-- Service Card 10: Oil Change & Fluid Check -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="1000"
+                <div class="service-card" data-aos="fade-up"
                     data-service-type="oil-fluid-check">
                     <div class="p-3 bg-opacity-20 bg-white text-white rounded-full mb-4 md:mb-6 inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
@@ -1655,17 +1666,19 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4"
+                        data-translate="serviceOilFluidChangeTitle">
                         Oil Change & Fluid Check</h3>
-                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow">
+                    <p class="text-sm md:text-base mb-4 md:mb-6 flex-grow" data-translate="serviceOilFluidChangeDesc">
                         Routine oil and filter changes, plus comprehensive checks and top-ups of all essential vehicle
                         fluids.</p>
                     <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base">Request Service</a>
+                        class="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm md:text-base"
+                        data-translate="requestServiceBtn">Request Service</a>
                 </div>
 
             </div>
-            <p class="mt-10 md:mt-12 text-xs md:text-sm max-w-2xl mx-auto"> *All
+            <p class="mt-10 md:mt-12 text-xs md:text-sm max-w-2xl mx-auto" data-translate="servicesDisclaimer"> *All
                 prices listed are starting estimates and are subject to change based on the specific vehicle,
                 location, complexity of the issue, time of service, and parts required. A detailed quote will be
                 provided upon assessment.
@@ -1673,66 +1686,41 @@
             <div class="section-contact-buttons mt-8 md:mt-10">
                 <a href="tel:+919303931226" class="button call-btn">
                     <i class="fas fa-phone-alt text-lg md:text-xl mr-2"></i>
-                    <span class="font-semibold">Call Now</span>
+                    <span class="font-semibold" data-translate="callNowBtn">Call Now</span>
                 </a>
                 <a href="https://wa.me/919303931226" target="_blank" class="button whatsapp-btn">
                     <i class="fab fa-whatsapp text-lg md:text-xl mr-2"></i>
-                    <span class="font-semibold">WhatsApp</span>
+                    <span class="font-semibold" data-translate="whatsappBtn">WhatsApp</span>
                 </a>
             </div>
-            <p class="text-xs md:text-sm opacity-80 mt-3 md:mt-4 text-center">
+            <p class="text-xs md:text-sm opacity-80 mt-3 md:mt-4 text-center" data-translate="contactClickInstruction">
                 Click to directly call or
                 message
                 us.</p>
         </div>
     </section>
 
-    <!-- New AI Assistant Section -->
-    <section id="ai-assistant" class="py-16 md:py-20 px-4">
-        <div class="container mx-auto">
-            <h2 class="section-title" data-aos="fade-up">AI Vehicle Issue Assistant ✨</h2>
-            <p class="text-lg md:text-xl mb-8" data-aos="fade-up" data-aos-delay="100">Describe your car's problem and get instant insights!</p>
-
-            <textarea id="issue-description"
-                class="w-full p-4 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
-                rows="6" placeholder="E.g., 'My car makes a loud grinding noise when I brake' or 'The engine light came on and the car feels sluggish.'"></textarea>
-
-            <button id="get-diagnosis-btn"
-                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                Get AI Diagnosis ✨
-            </button>
-
-            <div id="loading-indicator" class="loader"></div>
-
-            <div id="response-area" class="response-area mt-8 hidden">
-                <h3 class="text-blue-700">Diagnosis Results:</h3>
-                <div id="diagnosis-content"></div>
-                <p class="disclaimer-text">Disclaimer: This AI diagnosis is for informational purposes only and should not replace professional mechanic advice. Always consult a certified technician for accurate assessment and repair.</p>
-            </div>
-        </div>
-    </section>
-    <!-- End New AI Assistant Section -->
-
     <section id="satisfaction" class="py-16 md:py-20 px-4">
         <div class="container mx-auto max-w-6xl">
-            <h2 class="section-title" data-aos="fade-up">Quality Service, Happy
+            <h2 class="section-title" data-aos="fade-up" data-translate="satisfactionHeading">Quality Service, Happy
                 Customers</h2>
             <div class="flex flex-col md:flex-row items-center gap-8 md:gap-10">
-                <div class="w-full md:w-1/2" data-aos="fade-right" data-aos-delay="100">
-                    <img src="images/satisfoed2.jpg" alt="Mechanic repairing a car with a satisfied customer looking on"
+                <div class="w-full md:w-1/2" data-aos="fade-right">
+                    <img src="images\satisfoed2.jpg" alt="Mechanic repairing a car with a satisfied customer looking on"
                         class="rounded-xl shadow-lg w-full h-auto object-cover">
                 </div>
-                <div class="w-full md:w-1/2 text-left" data-aos="fade-left" data-aos-delay="200">
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4 text-blue-700">Your
+                <div class="w-full md:w-1/2 text-left" data-aos="fade-left">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4 text-blue-700"
+                        data-translate="satisfactionSubtitle">Your
                         Vehicle, Our Priority</h3>
-                    <p class="text-base md:text-lg mb-4 md:mb-6"> We are committed to
+                    <p class="text-base md:text-lg mb-4 md:mb-6" data-translate="satisfactionDesc"> We are committed to
                         providing top-notch mobile mechanic services that not only fix your car
                         issues
                         efficiently but also leave you with peace of mind. Our skilled technicians ensure every repair
                         is
                         done right, on the spot, so you can get back on the road safely and confidently.
                     </p>
-                    <p class="text-base md:text-lg italic"> "Fast, friendly, and
+                    <p class="text-base md:text-lg italic" data-translate="satisfactionQuote"> "Fast, friendly, and
                         fixed right the first time! Highly recommend Your Vehicles Care." - A Happy
                         Customer
                     </p>
@@ -1741,14 +1729,14 @@
             <div class="section-contact-buttons mt-8 md:mt-10">
                 <a href="tel:+919303931226" class="button call-btn">
                     <i class="fas fa-phone-alt text-lg md:text-xl mr-2"></i>
-                    <span class="font-semibold">Call Now</span>
+                    <span class="font-semibold" data-translate="callNowBtn">Call Now</span>
                 </a>
                 <a href="https://wa.me/919303931226" target="_blank" class="button whatsapp-btn">
                     <i class="fab fa-whatsapp text-lg md:text-xl mr-2"></i>
-                    <span class="font-semibold">WhatsApp</span>
+                    <span class="font-semibold" data-translate="whatsappBtn">WhatsApp</span>
                 </a>
             </div>
-            <p class="text-xs md:text-sm opacity-80 mt-3 md:mt-4 text-center">
+            <p class="text-xs md:text-sm opacity-80 mt-3 md:mt-4 text-center" data-translate="contactClickInstruction">
                 Click to directly call or
                 message
                 us.</p>
@@ -1758,20 +1746,23 @@
 
     <section id="inspection" class="py-16 md:py-20 px-4">
         <div class="container mx-auto max-w-4xl">
-            <h2 class="section-title" data-aos="fade-up">Inspection Charges</h2>
-            <p class="text-lg md:text-xl mb-8 md:mb-10 text-center" data-aos="fade-up" data-aos-delay="100">We offer transparent and competitive inspection charges based on
+            <h2 class="section-title" data-aos="fade-up" data-translate="inspectionHeading">Inspection Charges</h2>
+            <p class="text-lg md:text-xl mb-8 md:mb-10 text-center" data-aos="fade-up"
+                data-translate="inspectionSubheading">We offer transparent and competitive inspection charges based on
                 distance:</p>
-            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="info-card" data-aos="fade-up">
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y">
                         <thead>
                             <tr>
                                 <th scope="col"
-                                    class="px-4 md:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tl-lg">
+                                    class="px-4 md:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tl-lg"
+                                    data-translate="tableDistanceHeader">
                                     Distance
                                 </th>
                                 <th scope="col"
-                                    class="px-4 md:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tr-lg">
+                                    class="px-4 md:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tr-lg"
+                                    data-translate="tableChargesHeader">
                                     Charges
                                 </th>
                             </tr>
@@ -1779,7 +1770,7 @@
                         <tbody class="divide-y">
                             <tr>
                                 <td class="px-4 md:px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm">Under 5 km </div>
+                                    <div class="text-sm" data-translate="distanceUnder5km">Under 5 km </div>
                                 </td>
                                 <td class="px-4 md:px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm font-semibold text-green-600">₹350</div>
@@ -1787,7 +1778,7 @@
                             </tr>
                             <tr>
                                 <td class="px-4 md:px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm">5 - 10 km</div>
+                                    <div class="text-sm" data-translate="distance5to10km">5 - 10 km</div>
                                 </td>
                                 <td class="px-4 md:px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm font-semibold text-green-600">₹500</div>
@@ -1795,7 +1786,7 @@
                             </tr>
                             <tr>
                                 <td class="px-4 md:px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm">10 - 15 km </div>
+                                    <div class="text-sm" data-translate="distance10to15km">10 - 15 km </div>
                                 </td>
                                 <td class="px-4 md:px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm font-semibold text-green-600">₹650</div>
@@ -1810,7 +1801,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h1m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    <p class="text-xs md:text-sm italic">Additional costs may apply
+                    <p class="text-xs md:text-sm italic" data-translate="inspectionNote">Additional costs may apply
                         depending on
                         the
                         complexity of the repair and
@@ -1820,14 +1811,14 @@
             <div class="section-contact-buttons mt-8 md:mt-10">
                 <a href="tel:+919303931226" class="button call-btn">
                     <i class="fas fa-phone-alt text-lg md:text-xl mr-2"></i>
-                    <span class="font-semibold">Call Now</span>
+                    <span class="font-semibold" data-translate="callNowBtn">Call Now</span>
                 </a>
                 <a href="https://wa.me/919303931226" target="_blank" class="button whatsapp-btn">
                     <i class="fab fa-whatsapp text-lg md:text-xl mr-2"></i>
-                    <span class="font-semibold">WhatsApp</span>
+                    <span class="font-semibold" data-translate="whatsappBtn">WhatsApp</span>
                 </a>
             </div>
-            <p class="text-xs md:text-sm opacity-80 mt-3 md:mt-4 text-center">
+            <p class="text-xs md:text-sm opacity-80 mt-3 md:mt-4 text-center" data-translate="contactClickInstruction">
                 Click to directly call or
                 message
                 us.</p>
@@ -1836,39 +1827,41 @@
 
     <section id="team" class="py-16 md:py-20 px-4">
         <div class="container mx-auto max-w-6xl text-center">
-            <h2 class="section-title" data-aos="fade-up">Meet Our Expert Team</h2>
-            <p class="text-lg md:text-xl mb-8 md:mb-10" data-aos="fade-up" data-aos-delay="100"> We have a dedicated team of
+            <h2 class="section-title" data-aos="fade-up" data-translate="teamHeading">Meet Our Expert Team</h2>
+            <p class="text-lg md:text-xl mb-8 md:mb-10" data-aos="fade-up"
+                data-translate="teamSubheading"> We have a dedicated team of
                 experienced and certified mechanics ready to get you back on the road.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 my-10 md:my-12">
-                <div class="info-highlight" data-aos="fade-up" data-aos-delay="300">
-                    <div class="value">50+</div>
-                    <div class="label">Skilled Mechanics</div>
+                <div class="info-highlight" data-aos="fade-up">
+                    <div class="value" data-translate="teamMechanicsCount">50+</div>
+                    <div class="label" data-translate="teamMechanicsLabel">Skilled Mechanics</div>
                 </div>
-                <div class="info-highlight" data-aos="fade-up" data-aos-delay="400">
-                    <div class="value">10+ Years</div>
-                    <div class="label">Average Experience</div>
+                <div class="info-highlight" data-aos="fade-up">
+                    <div class="value" data-translate="teamExperienceValue">10+ Years</div>
+                    <div class="label" data-translate="teamExperienceLabel">Average Experience</div>
                 </div>
-                <div class="info-highlight" data-aos="fade-up" data-aos-delay="500">
-                    <div class="value">24/7</div>
-                    <div class="label">Service Availability</div>
+                <div class="info-highlight" data-aos="fade-up">
+                    <div class="value" data-translate="teamAvailabilityValue">24/7</div>
+                    <div class="label" data-translate="teamAvailabilityLabel">Service Availability</div>
                 </div>
             </div>
 
             <p class="text-xl md:text-2xl font-semibold text-blue-700 mb-10 md:mb-12" data-aos="fade-up"
-                data-aos-delay="600">
+                data-translate="servedCustomers">
                 We have proudly served over <span class="text-yellow-500">250+</span> satisfied customers!
             </p>
 
 
             <p class="italic max-w-2xl mx-auto mb-10 md:mb-12 text-base md:text-lg" data-aos="fade-up"
-                data-aos-delay="700"> Our mechanics are equipped with the latest tools and
+                data-translate="teamQuote"> Our mechanics are equipped with the latest tools and
                 technology to provide accurate diagnostics and
                 efficient repairs on the spot.
             </p>
 
-            <div class="customer-reviews max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="800">
-                <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-blue-700">What Our
+            <div class="customer-reviews max-w-3xl mx-auto" data-aos="fade-up">
+                <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-blue-700"
+                    data-translate="customerReviewsHeading">What Our
                     Customers Say</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="customer-review-card">
@@ -1876,42 +1869,43 @@
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                 class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
-                        <p class="review-text text-sm md:text-base">
+                        <p class="review-text text-sm md:text-base" data-translate="review1Text">
                             "Absolutely fantastic service! My car broke down unexpectedly, and Your Vehicles Care was there in
                             no time. The mechanic was professional and fixed the issue quickly. Highly recommend!"
                         </p>
-                        <p class="reviewer-name text-sm md:text-base">- Anjali Desai</p>
+                        <p class="reviewer-name text-sm md:text-base" data-translate="review1Name">- Anjali Desai</p>
                     </div>
                     <div class="customer-review-card">
                         <div class="rating">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                 class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                         </div>
-                        <p class="review-text text-sm md:text-base">
+                        <p class="review-text text-sm md:text-base" data-translate="review2Text">
                             "Convenient and reliable. Had a flat tire on my way to work, and they changed it right
                             there. Saved me a lot of hassle. Great job!"
                         </p>
-                        <p class="reviewer-name text-sm md:text-base">- Vikram Patel</p>
+                        <p class="reviewer-name text-sm md:text-base" data-translate="review2Name">- Vikram Patel</p>
                     </div>
                 </div>
             </div>
 
 
             <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-base md:text-lg mt-10 md:mt-12 inline-block">
+                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-base md:text-lg mt-10 md:mt-12 inline-block"
+                data-translate="teamRequestBtn">
                 Request a Mechanic Now
             </a>
             <div class="section-contact-buttons mt-8 md:mt-10">
                 <a href="tel:+919303931226" class="button call-btn">
                     <i class="fas fa-phone-alt text-lg md:text-xl mr-2"></i>
-                    <span class="font-semibold">Call Now</span>
+                    <span class="font-semibold" data-translate="callNowBtn">Call Now</span>
                 </a>
                 <a href="https://wa.me/919303931226" target="_blank" class="button whatsapp-btn">
                     <i class="fab fa-whatsapp text-lg md:text-xl mr-2"></i>
-                    <span class="font-semibold">WhatsApp</span>
+                    <span class="font-semibold" data-translate="whatsappBtn">WhatsApp</span>
                 </a>
             </div>
-            <p class="text-xs md:text-sm opacity-80 mt-3 md:mt-4 text-center">
+            <p class="text-xs md:text-sm opacity-80 mt-3 md:mt-4 text-center" data-translate="contactClickInstruction">
                 Click to directly call or
                 message
                 us.</p>
@@ -1921,12 +1915,13 @@
     <!-- New Join Us Section -->
     <section id="join-us" class="py-16 md:py-20 px-4 text-center bg-blue-600 text-white" data-aos="fade-up">
         <div class="container mx-auto max-w-4xl">
-            <h2 class="section-title" style="color: white;">Join Our Expert Mechanic Team!</h2>
-            <p class="text-lg md:text-xl mb-8 md:mb-10 opacity-90">
+            <h2 class="section-title" data-translate="joinUsHeading" style="color: white;">Join Our Expert Mechanic Team!</h2>
+            <p class="text-lg md:text-xl mb-8 md:mb-10 opacity-90" data-translate="joinUsSubheading">
                 Are you a skilled and dedicated mechanic looking for new opportunities? Partner with 'Your Vehicles Care' and provide on-demand vehicle services in your area.
             </p>
             <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 text-lg inline-block">
+                class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 text-lg inline-block"
+                data-translate="joinUsButton">
                 Apply to Join
             </a>
         </div>
@@ -1937,9 +1932,9 @@
     <section id="contact" class="text-white py-16 md:py-20 px-4 text-center" data-aos="fade-up"
         style="background-color: var(--button-call-bg);">
         <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6 md:mb-8"
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 md:mb-8" data-translate="contactHeading"
                 style="color: var(--sticky-button-text);">Need Immediate Assistance?</h2>
-            <p class="text-lg md:text-xl opacity-90 mb-6 md:mb-8">Our team is
+            <p class="text-lg md:text-xl opacity-90 mb-6 md:mb-8" data-translate="contactSubheading">Our team is
                 available 24/7 to respond
                 to
                 your roadside emergencies and
@@ -1955,7 +1950,7 @@
                         </path>
                     </svg>
                     <div>
-                        <p class="text-xs md:text-sm opacity-80">Call Us Anytime:</p>
+                        <p class="text-xs md:text-sm opacity-80" data-translate="contactCallLabel">Call Us Anytime:</p>
                         <p class="text-2xl md:text-3xl font-bold text-green-500">9303931226</p>
                     </div>
                 </div>
@@ -1967,14 +1962,15 @@
                         </path>
                     </svg>
                     <div>
-                        <p class="text-xs md:text-sm opacity-80">Email Us:</p>
+                        <p class="text-xs md:text-sm opacity-80" data-translate="contactEmailLabel">Email Us:</p>
                         <p class="text-lg md:text-xl font-semibold">aabhassolankiforwork@gmail.com</p>
                     </div>
                 </div>
             </div>
 
             <a href="https://aabhas-rising.github.io/MOS-Form-/"
-                class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 text-base md:text-lg inline-block">
+                class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 text-base md:text-lg inline-block"
+                data-translate="contactRequestBtn">
                 Request a Service Online
             </a>
         </div>
@@ -1983,11 +1979,13 @@
     <center>
         <section id="social-media" class="py-12 md:py-16 px-4">
             <div class="container mx-auto max-w-2xl">
-                <h2 class="text-2xl md:text-3xl font-semibold mb-6 md:mb-8" data-aos="fade-up"> Follow Us</h2>
-                <p class="text-base md:text-lg mb-8 md:mb-10" data-aos="fade-up" data-aos-delay="100">Stay connected with us on social media for updates and
+                <h2 class="text-2xl md:text-3xl font-semibold mb-6 md:mb-8" data-aos="fade-up"
+                    data-translate="socialMediaHeading"> Follow Us</h2>
+                <p class="text-base md:text-lg mb-8 md:mb-10" data-aos="fade-up"
+                    data-translate="socialMediaSubheading">Stay connected with us on social media for updates and
                     offers!
                 </p>
-                <div class="flex justify-center space-x-6 social-icons" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex justify-center space-x-6 social-icons" data-aos="fade-up">
                     <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
                         <i class="fab fa-facebook-f text-2xl md:text-3xl"></i>
                     </a>
@@ -2006,47 +2004,48 @@
     </center>
 
 
-
-
-
     <footer class="py-10 md:py-12 px-4">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-                <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4">Your Vehicles Care</h3>
-                <p class="text-xs md:text-sm">Providing professional and reliable
+                <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4" data-translate="footerTitle">Your Vehicles Care</h3>
+                <p class="text-xs md:text-sm" data-translate="footerDescription">Providing professional and reliable
                     on-demand
                     vehicle
                     repair and assistance services
                     directly to your location.</p>
-                <p class="text-xs md:text-sm mt-3 md:mt-4">© <span
+                <p class="text-xs md:text-sm mt-3 md:mt-4" data-translate="footerCopyright">© <span
                         id='current-year'></span> Your Vehicles Care.
                     All
                     rights reserved.</p>
             </div>
             <div>
-                <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4">Quick Links</h3>
+                <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4" data-translate="footerQuickLinks">Quick Links</h3>
                 <ul class="space-y-2 text-xs md:text-sm">
-                    <li><a href="#hero" class="hover:text-white transition duration-300">Home</a>
+                    <li><a href="#hero" class="hover:text-white transition duration-300"
+                            data-translate="navHome">Home</a>
                     </li>
-                    <li><a href="#services" class="hover:text-white transition duration-300">Services</a></li>
-                    <li><a href="#ai-assistant" class="hover:text-white transition duration-300">AI Assistant</a></li>
-                    <li><a href="#inspection" class="hover:text-white transition duration-300">Inspection Charges</a></li>
-                    <li><a href="#team" class="hover:text-white transition duration-300">Our
+                    <li><a href="#services" class="hover:text-white transition duration-300"
+                            data-translate="navServices">Services</a></li>
+                    <li><a href="#inspection" class="hover:text-white transition duration-300"
+                            data-translate="navInspection">Inspection Charges</a></li>
+                    <li><a href="#team" class="hover:text-white transition duration-300" data-translate="navTeam">Our
                             Team</a></li>
-                    <li><a href="#join-us" class="hover:text-white transition duration-300">Join Our Team</a></li>
+                    <li><a href="#join-us" class="hover:text-white transition duration-300"
+                            data-translate="navJoinUs">Join Our Team</a></li>
                     <li><a href="https://aabhas-rising.github.io/MOS-Form-/"
-                            class="hover:text-white transition duration-300">Contact
+                            class="hover:text-white transition duration-300" data-translate="navContactUs">Contact
                             Us</a>
                     </li>
-                    <li><a href="terms.html" class="hover:text-white transition duration-300">Terms
+                    <li><a href="terms.html" class="hover:text-white transition duration-300"
+                            data-translate="navTerms">Terms
                             & Conditions</a></li>
                 </ul>
             </div>
             <div>
-                <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4">Get In Touch
+                <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4" data-translate="footerGetInTouch">Get In Touch
                 </h3>
-                <p class="text-xs md:text-sm mb-2">Phone: 9303931226</p>
-                <p class="text-xs md:text-sm mb-3 md:mb-4">Email:
+                <p class="text-xs md:text-sm mb-2" data-translate="footerPhone">Phone: 9303931226</p>
+                <p class="text-xs md:text-sm mb-3 md:mb-4" data-translate="footerEmail">Email:
                     aabhassolankiforwork@gmail.com</p>
                 <div class="flex space-x-4 social-icons">
                     <a href="#" class="hover:text-white transition duration-300" aria-label="Facebook">
@@ -2086,6 +2085,447 @@
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
+        // Language translations object
+        const translations = {
+            en: {
+                // Navigation
+                siteTitle: "Your Vehicles Care",
+                navHome: "Home",
+                navServices: "Services",
+                navInspection: "Inspection Charges",
+                navTeam: "Our Team",
+                navJoinUs: "Join Our Team", // New
+                navContact: "Contact",
+                navTerms: "Terms",
+
+                // Hero Section
+                heroHeading: "Expert On-Demand Vehicle Solutions, Delivered to You",
+                heroSubheading: "Reliable roadside assistance and mobile mechanic services. We bring the workshop to your location for prompt and efficient repairs.",
+                heroViewServicesBtn: "View Services",
+                heroRequestServiceBtn: "Request Service",
+                callNowBtn: "Call Now",
+                whatsappBtn: "WhatsApp",
+                contactClickInstruction: "Click to directly call or message us.",
+
+                // Services Section
+                servicesHeading: "Our Professional Services",
+                serviceJumpStartTitle: "Jump Start",
+                serviceJumpStartDesc: "Rapid assistance for dead batteries to get your vehicle running again quickly and safely.",
+                serviceFlatTireTitle: "Flat Tire Change",
+                serviceFlatTireDesc: "Professional and safe replacement of your flat or damaged tire with your spare on location.",
+                serviceFuelDeliveryTitle: "Emergency Fuel Delivery",
+                serviceFuelDeliveryDesc: "Running on empty? We deliver fuel directly to your location to get you to the nearest station.",
+                serviceDiagnosticsTitle: "Engine Diagnostics",
+                serviceDiagnosticsDesc: "Utilizing advanced tools to accurately diagnose check engine lights and other performance issues on the spot.",
+                serviceBatteryTitle: "Battery Replacement",
+                serviceBatteryDesc: "Supply and installation of high-quality batteries suitable for your vehicle's specifications.",
+                serviceMinorRepairsTitle: "Minor Repairs & Checks",
+                serviceMinorRepairsDesc: "Addressing common issues like belt replacements, fluid top-offs, filter changes, and basic inspections.",
+                serviceCarTowingTitle: "Car Towing", // New service
+                serviceCarTowingDesc: "Reliable towing services for breakdowns, accidents, or transportation to a repair shop.", // New service
+                serviceBrakeRepairTitle: "Brake System Repair", // New service
+                serviceBrakeRepairDesc: "Thorough inspection and repair of brake pads, rotors, calipers, and fluid for optimal stopping power.", // New service
+                serviceACHeatingTitle: "A/C & Heating Service", // New service
+                serviceACHeatingDesc: "Recharge, repair, and maintenance of your vehicle's air conditioning and heating systems for comfort.", // New service
+                serviceOilFluidChangeTitle: "Oil Change & Fluid Check", // New service
+                serviceOilFluidChangeDesc: "Routine oil and filter changes, plus comprehensive checks and top-ups of all essential vehicle fluids.", // New service
+                servicesDisclaimer: "*All prices listed are starting estimates and are subject to change based on the specific vehicle, location, complexity of the issue, time of service, and parts required. A detailed quote will be provided upon assessment.",
+
+                // Customer Satisfaction Section
+                satisfactionHeading: "Quality Service, Happy Customers",
+                satisfactionSubtitle: "Your Vehicle, Our Priority",
+                satisfactionDesc: "We are committed to providing top-notch mobile mechanic services that not only fix your car issues efficiently but also leave you with peace of mind. Our skilled technicians ensure every repair is done right, on the spot, so you can get back on the road safely and confidently.",
+                satisfactionQuote: "\"Fast, friendly, and fixed right the first time! Highly recommend Your Vehicles Care.\" - A Happy Customer",
+
+                // Inspection Charges Section
+                inspectionHeading: "Inspection Charges",
+                inspectionSubheading: "We offer transparent and competitive inspection charges based on distance:",
+                tableDistanceHeader: "Distance",
+                tableChargesHeader: "Charges",
+                distanceUnder5km: "Under 5 km",
+                distance5to10km: "5 - 10 km",
+                distance10to15km: "10 - 15 km",
+                inspectionNote: "Its just a inspection charge , additional costs may apply depending on the complexity of the repair and required parts. Dont waste our time on barganing , we are here to help you fix your car.",
+
+                // Team Section
+                teamHeading: "Meet Our Expert Team",
+                teamSubheading: "We have a dedicated team of experienced and certified mechanics ready to get you back on the road.",
+                servedCustomers: "We have proudly served over <span class=\"text-yellow-500\">250+</span> satisfied customers!", // Added served count
+                teamMechanicsCount: "50+",
+                teamMechanicsLabel: "Skilled Mechanics",
+                teamExperienceValue: "10+ Years",
+                teamExperienceLabel: "Average Experience",
+                teamAvailabilityValue: "24/7",
+                teamAvailabilityLabel: "Service Availability",
+                teamQuote: "Our mechanics are equipped with the latest tools and technology to provide accurate diagnostics and efficient repairs on the spot.",
+                teamRequestBtn: "Request a Mechanic Now",
+                customerReviewsHeading: "What Our Customers Say", // Added reviews heading
+                review1Text: "\"Absolutely fantastic service! My car broke down unexpectedly, and Your Vehicles Care was there in no time. The mechanic was professional and fixed the issue quickly. Highly recommend!\"", // Added review 1
+                review1Name: "- Anjali Desai", // Added Indian reviewer 1 name
+                review2Text: "\"Convenient and reliable. Had a flat tire on my way to work, and they changed it right there. Saved me a lot of hassle. Great job!\"", // Added review 2
+                review2Name: "- Vikram Patel", // Added Indian reviewer 2 name
+
+                // New Join Us Section
+                joinUsHeading: "Join Our Expert Mechanic Team!",
+                joinUsSubheading: "Are you a skilled and dedicated mechanic looking for new opportunities? Partner with 'Your Vehicles Care' and provide on-demand vehicle services in your area.",
+                joinUsButton: "Apply to Join",
+
+                // Contact Section
+                contactHeading: "Need Immediate Assistance?",
+                contactSubheading: "Our team is available 24/7 to respond to your roadside emergencies and service requests.",
+                contactCallLabel: "Call Us Anytime:",
+                contactEmailLabel: "Email Us:",
+                contactRequestBtn: "Request a Service Online",
+
+                // Social Media Section
+                socialMediaHeading: "Follow Us",
+                socialMediaSubheading: "Stay connected with us on social media for updates and offers!",
+
+                // Terms and Conditions Section
+                termsHeading: "Terms and Conditions",
+                termsList: [
+                    // Add translation for each list item if needed, or handle in JS
+                ],
+                termsAgreement: "By proceeding with a service request, you acknowledge that you have read, understood, and agreed to these terms and conditions.",
+
+
+                // Footer
+                footerTitle: "Your Vehicles Care",
+                footerDescription: "Providing professional and reliable on-demand vehicle repair and assistance services directly to your location.",
+                footerCopyright: "© <span id='current-year'></span> Your Vehicles Care. All rights reserved.",
+                footerQuickLinks: "Quick Links",
+                navContactUs: "Contact Us",
+                footerGetInTouch: "Get In Touch",
+                footerPhone: "Phone: 9303931226",
+                footerEmail: "aabhassolankiforwork@gmail.com",
+                callUsBtn: "Call Us", // For sticky button
+                requestServiceStickyBtn: "Request Service" // New translation for sticky button
+            },
+            hi: {
+                // Navigation
+                siteTitle: "योर व्हेइकल्स केअर",
+                navHome: "होम",
+                navServices: "सेवाएं",
+                navInspection: "निरीक्षण शुल्क",
+                navTeam: "हमारी टीम",
+                navJoinUs: "हमारी टीम से जुड़ें", // New
+                navContact: "संपर्क करें",
+                navTerms: "शर्तें",
+
+                // Hero Section
+                heroHeading: "विशेषज्ञ ऑन-डिमांड वाहन समाधान, आप तक पहुंचाए गए",
+                heroSubheading: "विश्वसनीय सड़क किनारे सहायता और मोबाइल मैकेनिक सेवाएं। हम शीघ्र और कुशल मरम्मत के लिए कार्यशाला आपके स्थान पर लाते हैं।",
+                heroViewServicesBtn: "सेवाएं देखें",
+                heroRequestServiceBtn: "सेवा का अनुरोध करें",
+                callNowBtn: "अभी कॉल करें",
+                whatsappBtn: "व्हाट्सएप",
+                contactClickInstruction: "सीधे कॉल या मैसेज करने के लिए क्लिक करें।",
+
+                // Services Section
+                servicesHeading: "हमारी पेशेवर सेवाएं",
+                serviceJumpStartTitle: "जंप स्टार्ट",
+                serviceJumpStartDesc: "डेड बैटरी के लिए त्वरित सहायता ताकि आपका वाहन जल्दी और सुरक्षित रूप से फिर से चालू हो सके।",
+                serviceFlatTireTitle: "पंचर टायर बदलना",
+                serviceFlatTireDesc: "आपके पंचर या क्षतिग्रस्त टायर को आपके स्पेयर टायर से स्थान पर पेशेवर और सुरक्षित रूप से बदलना।",
+                serviceFuelDeliveryTitle: "आपातकालीन ईंधन वितरण",
+                serviceFuelDeliveryDesc: "ईंधन खत्म हो रहा है? हम आपको निकटतम स्टेशन तक पहुंचाने के लिए सीधे आपके स्थान पर ईंधन पहुंचाते हैं।",
+                serviceDiagnosticsTitle: "इंजन डायग्नोस्टिक्स",
+                serviceDiagnosticsDesc: "चेक इंजन लाइट और अन्य प्रदर्शन मुद्दों का सटीक निदान करने के लिए उन्नत उपकरणों का उपयोग करना।",
+                serviceBatteryTitle: "बैटरी बदलना",
+                serviceBatteryDesc: "आपके वाहन के विनिर्देशों के लिए उपयुक्त उच्च गुणवत्ता वाली बैटरी की आपूर्ति और स्थापना।",
+                serviceMinorRepairsTitle: "छोटी मरम्मत और जांच",
+                serviceMinorRepairsDesc: "बेल्ट बदलने, फ्लूइड टॉप-ऑफ, फिल्टर बदलने और बुनियादी निरीक्षण जैसे सामान्य मुद्दों को संबोधित करना।",
+                serviceCarTowingTitle: "कार टोइंग", // New service
+                serviceCarTowingDesc: "ब्रेकडाउन, दुर्घटनाओं, या मरम्मत की दुकान तक परिवहन के लिए विश्वसनीय टोइंग सेवाएं।", // New service
+                serviceBrakeRepairTitle: "ब्रेक सिस्टम की मरम्मत", // New service
+                serviceBrakeRepairDesc: "इष्टतम ब्रेकिंग शक्ति के लिए ब्रेक पैड, रोटर, कैलिपर्स और द्रव का गहन निरीक्षण और मरम्मत।", // New service
+                serviceACHeatingTitle: "ए/सी और हीटिंग सेवा", // New service
+                serviceACHeatingDesc: "आराम के लिए आपके वाहन के एयर कंडीशनिंग और हीटिंग सिस्टम का रिचार्ज, मरम्मत और रखरखाव।", // New service
+                serviceOilFluidChangeTitle: "तेल परिवर्तन और द्रव जांच", // New service
+                serviceOilFluidChangeDesc: "नियमित तेल और फिल्टर परिवर्तन, साथ ही सभी आवश्यक वाहन तरल पदार्थों की व्यापक जांच और टॉप-अप।", // New service
+                servicesDisclaimer: "*सूचीबद्ध सभी कीमतें शुरुआती अनुमान हैं और विशिष्ट वाहन, स्थान, समस्या की जटिलता, सेवा के समय और आवश्यक पुर्जों के आधार पर परिवर्तन के अधीन हो सकती हैं। मूल्यांकन पर एक विस्तृत उद्धरण प्रदान किया जाएगा।",
+
+                // Customer Satisfaction Section
+                satisfactionHeading: "गुणवत्ता सेवा, खुश ग्राहक",
+                satisfactionSubtitle: "आपका वाहन, हमारी प्राथमिकता",
+                satisfactionDesc: "हम उच्च गुणवत्ता वाली मोबाइल मेकॅनिक सेवाएं प्रदान करने के लिए प्रतिबद्ध हैं जो न केवल आपकी कार की समस्याओं को कुशलता से ठीक करती हैं बल्कि आपको मानसिक शांति भी देती हैं। हमारे कुशल तकनीशियन सुनिश्चित करते हैं कि हर मरम्मत सही ढंग से, मौके पर की जाए, ताकि आप सुरक्षित और आत्मविश्वास से सड़क पर वापस आ सकें।",
+                satisfactionQuote: "\"तेज़, मैत्रीपूर्ण, और पहली बार में ही ठीक हो गया! योर व्हेइकल्स केअर की अत्यधिक अनुशंसा करते हैं।\" - एक खुश ग्राहक",
+
+                // Inspection Charges Section
+                inspectionHeading: "निरीक्षण शुल्क",
+                inspectionSubheading: "हम दूरी के आधार पर पारदर्शक और प्रतिस्पर्धी निरीक्षण शुल्क प्रदान करते हैं:",
+                tableDistanceHeader: "दूरी",
+                tableChargesHeader: "शुल्क",
+                distanceUnder5km: "5 किमी से कम",
+                distance5to10km: "5 - 10 किमी",
+                distance10to15km: "10 - 15 किमी",
+                inspectionNote: "मरम्मत की जटिलता और आवश्यक पुर्जों के आधार पर अतिरिक्त लागतें लागू हो सकती हैं।",
+
+                // Team Section
+                teamHeading: "हमारी विशेषज्ञ टीम से मिलें",
+                teamSubheading: "हमारे पास अनुभवी और प्रमाणित यांत्रिकी की एक समर्पित टीम है जो आपको सड़क पर वापस लाने के लिए तैयार है。",
+                servedCustomers: "हमने गर्व से <span class=\"text-yellow-500\">250+</span> से अधिक संतुष्ट ग्राहकों की सेवा की है!", // Added served count
+                teamMechanicsCount: "50+",
+                teamMechanicsLabel: "कुशल यांत्रिकी",
+                teamExperienceValue: "10+ वर्ष",
+                teamExperienceLabel: "औसत अनुभव",
+                teamAvailabilityValue: "24/7",
+                teamAvailabilityLabel: "सेवा उपलब्धता",
+                teamQuote: "हमारे यांत्रिकी मौके पर सटीक निदान और कुशल मरम्मत प्रदान करने के लिए नवीनतम उपकरणों और प्रौद्योगिकी से लैस हैं。",
+                teamRequestBtn: "अभी एक मैकेनिक का अनुरोध करें",
+                customerReviewsHeading: "हमारे ग्राहक क्या कहते हैं", // Added reviews heading
+                review1Text: "\"बिल्कुल शानदार सेवा! मेरी कार अप्रत्याशित रूप से खराब हो गई, और योर व्हेइकल्स केअर तुरंत वहां थी। मैकेनिक पेशेवर था और समस्या को जल्दी ठीक कर दिया। अत्यधिक अनुशंसा करता हूँ!\"", // Added review 1
+                review1Name: "- अंजलि देसाई", // Added Indian reviewer 1 name
+                review2Text: "\"सुविधाजनक और विश्वसनीय। काम पर जाते समय मेरा टायर पंचर हो गया था, और उन्होंने इसे वहीं बदल दिया। मुझे बहुत सारी परेशानी से बचाया। बहुत बढ़िया काम!\"", // Added review 2
+                review2Name: "- विक्रम पटेल", // Added Indian reviewer 2 name
+
+                // New Join Us Section
+                joinUsHeading: "हमारी विशेषज्ञ मैकेनिक टीम में शामिल हों!",
+                joinUsSubheading: "क्या आप नए अवसरों की तलाश में एक कुशल और समर्पित मैकेनिक हैं? 'योर व्हेइकल्स केअर' के साथ भागीदार बनें और अपने क्षेत्र में ऑन-डिमांड वाहन सेवाएं प्रदान करें।",
+                joinUsButton: "शामिल होने के लिए आवेदन करें",
+
+                // Contact Section
+                contactHeading: "तत्काल सहायता चाहिए?",
+                contactSubheading: "हमारी टीम आपकी सड़क किनारे आपात स्थितियों और सेवा अनुरोधों का जवाब देने के लिए 24/7 उपलब्ध है。",
+                contactCallLabel: "हमें कभी भी कॉल करें:",
+                contactEmailLabel: "हमें ईमेल करें:",
+                contactRequestBtn: "ऑनलाइन सेवा का अनुरोध करें",
+
+                // Social Media Section
+                socialMediaHeading: "हमें फॉलो करें",
+                socialMediaSubheading: "अपडेट्स और ऑफ़र के लिए सोशल मीडिया पर हमसे जुड़े रहें!",
+
+                // Terms and Conditions Section
+                termsHeading: "नियम और शर्तें",
+                termsList: [
+                    // Add translation for each list item if needed, or handle in JS
+                ],
+                termsAgreement: "सेवा अनुरोध के साथ आगे बढ़ने से, आप स्वीकार करते हैं कि आपने इन नियमों और शर्तों को पढ़ा, समझा और स्वीकार किया है。",
+
+                // Footer
+                footerTitle: "योर व्हेइकल्स केअर",
+                footerDescription: "आपके स्थान पर सीधे पेशेवर और विश्वसनीय ऑन-डिमांड वाहन मरम्मत और सहायता सेवाएं प्रदान करना。",
+                footerCopyright: "© <span id='current-year'></span> योर व्हेइकल्स केअर. सर्वाधिकार सुरक्षित。",
+                footerQuickLinks: "त्वरित लिंक",
+                navContactUs: "हमसे संपर्क करें",
+                footerGetInTouch: "संपर्कात रहें",
+                footerPhone: "फोन: 9303931226",
+                footerEmail: "ईमेल: aabhassolankiforwork@gmail.com",
+                callUsBtn: "हमें कॉल करें", // For sticky button
+                requestServiceStickyBtn: "सेवा का अनुरोध करें" // New translation for sticky button
+            },
+            gu: {
+                // Navigation
+                siteTitle: "યોર વ્હીકલ્સ કેર",
+                navHome: "હોમ",
+                navServices: "સેવાઓ",
+                navInspection: "નિરીક્ષણ શુલ્ક",
+                navTeam: "અમારી ટીમ",
+                navJoinUs: "અમારી ટીમમાં જોડાઓ", // New
+                navContact: "સંપર્ક કરો",
+                navTerms: "શરતો",
+
+                // Hero Section
+                heroHeading: "નિષ્ણાત ઓન-ડિમાન્ડ વાહન ઉકેલો, તમારા સુધી પહોંચાડવામાં આવે છે",
+                heroSubheading: "વિશ્વસનીય રોડસાઇડ સહાય અને મોબાઇલ મિકેનિક સેવાઓ. અમે તાત્કાલિક અને કાર્યક્ષમ સમારકામ માટે વર્કશોપ તમારા સ્થાન પર લાવીએ છીએ.",
+                heroViewServicesBtn: "સેવાઓ જુઓ",
+                heroRequestServiceBtn: "સેવા વિનંતી કરો",
+                callNowBtn: "હવે કૉલ કરો",
+                whatsappBtn: "વોટ્સએપ",
+                contactClickInstruction: "સીધો કૉલ અથવા મેસેજ કરવા માટે ક્લિક કરો.",
+
+                // Services Section
+                servicesHeading: "અમારી વ્યાવસાયિક સેવાઓ",
+                serviceJumpStartTitle: "જમ્પ સ્ટાર્ટ",
+                serviceJumpStartDesc: "ડેડ બેટરી માટે ઝડપી સહાય જેથી તમારું વાહન ઝડપથી અને સુરક્ષિત રીતે ફરીથી ચાલુ થઈ શકે.",
+                serviceFlatTireTitle: "પંચર ટાયર બદલવું",
+                serviceFlatTireDesc: "તમારા પંચર અથવા ક્ષતિગ્રસ્ત ટાયરને તમારા સ્પેર ટાયરથી સ્થાન પર વ્યાવસાયિક અને સુરક્ષિત રીતે બદલવું.",
+                serviceFuelDeliveryTitle: "આપાતકાલીન ઇંધણ વિતરણ",
+                serviceFuelDeliveryDesc: "ઇંધણ ખાલી થઈ રહ્યું છે? અમે તમને નજીકના સ્ટેશન સુધી પહોંચાડવા માટે સીધા તમારા સ્થાન પર ઇંધણ પહોંચાડીએ છીએ.",
+                serviceDiagnosticsTitle: "એન્જિન ડાયગ્નોસ્ટિક્સ",
+                serviceDiagnosticsDesc: "ચેક એન્જિન લાઇટ અને અન્ય પ્રદર્શન મુદ્દાઓનું સચોટ નિદાન કરવા માટે અદ્યતન સાધનોનો ઉપયોગ કરવો.",
+                serviceBatteryTitle: "બેટરી બદલવી",
+                serviceBatteryDesc: "તમારા વાહનના વિશિષ્ટતાઓ માટે યોગ્ય ઉચ્ચ-ગુણવત્તાવાળી બેટરીની સપ્લાય અને ઇન્સ્ટોલેશન.",
+                serviceMinorRepairsTitle: "નાની સમારકામ અને તપાસ",
+                serviceMinorRepairsDesc: "બેલ્ટ બદલવા, ફ્લુઇડ ટોપ-ઓફ, ફિલ્ટર બદલવા અને મૂળભૂત નિરીક્ષણ જેવા સામાન્ય મુદ્દાઓને સંબોધવા.",
+                serviceCarTowingTitle: "કાર ટોઇંગ", // New service
+                serviceCarTowingDesc: "બ્રેકડાઉન, અકસ્માતો, અથવા સમારકામની દુકાન સુધી પરિવહન માટે વિશ્વસનીય ટોઇંગ સેવાઓ.", // New service
+                serviceBrakeRepairTitle: "બ્રેક સિસ્ટમનું સમારકામ", // New service
+                serviceBrakeRepairDesc: "ઇષ્ટતમ સ્ટોપિંગ પાવર માટે બ્રેક પેડ્સ, રોટર્સ, કેલિપર્સ અને પ્રવાહીનું સંપૂર્ણ નિરીક્ષણ અને સમારકામ.", // New service
+                serviceACHeatingTitle: "એ/સી અને હીટિંગ સેવા", // New service
+                serviceACHeatingDesc: "આરામ માટે તમારા વાહનની એર કન્ડિશનિંગ અને હીટિંગ સિસ્ટમ્સનું રિચાર્જ, સમારકામ અને જાળવણી.", // New service
+                serviceOilFluidChangeTitle: "ઓઇલ ચેન્જ અને ફ્લુઇડ ચેક", // New service
+                serviceOilFluidChangeDesc: "નિયમિત ઓઇલ અને ફિલ્ટર બદલવા, ઉપરાંત તમામ આવશ્યક વાહન પ્રવાહીના વ્યાપક તપાસ અને ટોપ-અપ્સ.", // New service
+                servicesDisclaimer: "*સૂચિબદ્ધ તમામ કિંમતો પ્રારંભિક અંદાજો છે અને વિશિષ્ટ વાહન, સ્થાન, સમસ્યાની જટિલતા, સેવાના સમય અને જરૂરી ભાગોના આધારે બદલાઈ શકે છે. મૂલ્યાંકન પર વિગતવાર ક્વોટ પ્રદાન કરવામાં આવશે.",
+
+                // Customer Satisfaction Section
+                satisfactionHeading: "ગુણવત્તા સેવા, ખુશ ગ્રાહકો",
+                satisfactionSubtitle: "તમારું વાહન, અમારી પ્રાથમિકતા",
+                satisfactionDesc: "અમે ઉચ્ચ-ગુણવત્તાવાળી મોબાઇલ મિકેનિક સેવાઓ પ્રદાન કરવા માટે પ્રતિબદ્ધ છીએ જે ફક્ત તમારી કારની સમસ્યાઓને કાર્યક્ષમ રીતે ઠીક કરતી નથી પણ તમને માનસિક શાંતિ પણ આપે છે. અમારા કુશળ ટેકનિશિયન ખાતરી કરે છે કે દરેક સમારકામ યોગ્ય રીતે, સ્થળ પર કરવામાં આવે, જેથી તમે સુરક્ષિત અને આત્મવિશ્વાસથી રસ્તા પર પાછા આવી શકો.",
+                satisfactionQuote: "\"ઝડપી, મૈત્રીપૂર્ણ, અને પહેલી વારમાં જ ઠીક થઈ ગયું! યોર વ્હીકલ્સ કેરની ખૂબ ભલામણ કરીએ છીએ.\" - એક ખુશ ગ્રાહક",
+
+                // Inspection Charges Section
+                inspectionHeading: "નિરીક્ષણ શુલ્ક",
+                inspectionSubheading: "અમે અંતરના આધારે પારદર્શક અને સ્પર્ધાત્મક નિરીક્ષણ શુલ્ક ઓફર કરીએ છીએ:",
+                tableDistanceHeader: "અંતર",
+                tableChargesHeader: "શુલ્ક",
+                distanceUnder5km: "5 કિમીથી ઓછું",
+                distance5to10km: "5 - 10 કિમી",
+                distance10to15km: "10 - 15 કિમી",
+                inspectionNote: "સમારકામની જટિલતા અને જરૂરી ભાગોના આધારે વધારાની કિંમતો લાગુ થઈ શકે છે。",
+
+                // Team Section
+                teamHeading: "અમારી નિષ્ણાત ટીમ સાથે મળો",
+                teamSubheading: "અમારી પાસે અનુભવી અને પ્રમાણિત મિકેનિક્સની સમર્પિત ટીમ છે જે તમને રસ્તા પર પાછા લાવવા માટે તૈયાર છે.",
+                servedCustomers: "અમે ગર્વથી <span class=\"text-yellow-500\">250+</span> થી વધુ સંતુષ્ટ ગ્રાહકોને સેવા આપી છે!", // Added served count
+                teamMechanicsCount: "50+",
+                teamMechanicsLabel: "કુશળ મિકેનિક્સ",
+                teamExperienceValue: "10+ વર્ષ",
+                teamExperienceLabel: "સરેરાશ અનુભવ",
+                teamAvailabilityValue: "24/7",
+                teamAvailabilityLabel: "સેવા ઉપલબ્ધતા",
+                teamQuote: "અમારા મિકેનિક્સ સ્થળ પર સચોટ ડાયગ્નોસ્ટિક્સ અને કાર્યક્ષમ સમારકામ પ્રદાન કરવા માટે નવીનતમ સાધનો અને ટેકનોલોજીથી સજ્જ છે.",
+                teamRequestBtn: "હવે મિકેનિક વિનંતી કરો",
+                customerReviewsHeading: "અમારા ગ્રાહકો શું કહે છે", // Added reviews heading
+                review1Text: "\"ખરેખર અદ્ભુત સેવા! મારી કાર અચાનક બંધ પડી ગઈ, અને યોર વ્હીકલ્સ કેર તરત જ ત્યાં હતી. મિકેનિક વ્યાવસાયિક હતો અને સમસ્યાને ઝડપથી ઠીક કરી દીધી. ખૂબ ભલામણ કરું છું!\"", // Added review 1
+                review1Name: "- અંજલિ દેસાઈ", // Added Indian reviewer 1 name
+                review2Text: "\"સુવિધાજનક અને વિશ્વસનીય. કામ પર જતા સમયે મારો ટાયર પંચર થઈ ગયો હતો, અને તેઓએ તેને ત્યાં જ બદલી દીધો. મને ઘણી મુશ્કેલીથી બચાવ્યો. ખૂબ સરસ કામ!\"", // Added review 2
+                review2Name: "- વિક્રમ પટેલ", // Added Indian reviewer 2 name
+
+                // New Join Us Section
+                joinUsHeading: "અમારી નિષ્ણાત મિકેનિક ટીમમાં જોડાઓ!",
+                joinUsSubheading: "શું તમે નવા અવસરોની શોધમાં એક કુશળ અને સમર્પિત મિકેનિક છો? 'યોર વ્હીકલ્સ કેર' સાથે ભાગીદાર બનો અને તમારા વિસ્તારમાં ઑન-ડિમાન્ડ વાહન સેવાઓ પ્રદાન કરો.",
+                joinUsButton: "જોડાવા માટે અરજી કરો",
+
+                // Contact Section
+                contactHeading: "તાત્કાલિક સહાયની જરૂર છે?",
+                contactSubheading: "અમારી ટીમ તમારી રોડસાઇડ ઇમરજન્સી અને સેવા વિનંતીઓનો જવાબ આપવા માટે 24/7 ઉપલબ્ધ છે。",
+                contactCallLabel: "અમને ગમે ત્યારે કૉલ કરો:",
+                contactEmailLabel: "અમને ઇમેઇલ કરો:",
+                contactRequestBtn: "ઓનલાઈન સેવા વિનંતી કરો",
+
+                // Social Media Section
+                socialMediaHeading: "અમને અનુસરો",
+                socialMediaSubheading: "અપડેટ્સ અને ઑફર્સ માટે સોશિયલ મીડિયા પર અમારી સાથે જોડાયેલા રહો!",
+
+                // Terms and Conditions Section
+                termsHeading: "નિયમો અને શરતો",
+                termsList: [
+                    // Add translation for each list item if needed, or handle in JS
+                ],
+                termsAgreement: "સેવા વિનંતી સાથે આગળ વધીને, તમે સ્વીકારો છો કે તમે આ નિયમો અને શરતો વાંચી, સમજી અને સંમત થયા છો。",
+
+                // Footer
+                footerTitle: "યોર વ્હીકલ્સ કેર",
+                footerDescription: "તમારા સ્થાન પર સીધા જ વ્યાવસાયિક અને વિશ્વસનીય ઓન-ડિમાન્ડ વાહન સમારકામ અને સહાય સેવાઓ પ્રદાન કરવી。",
+                footerCopyright: "© <span id='current-year'></span> યોર વ્હીકલ્સ કેર. સર્વાધિકાર સુરક્ષિત。",
+                footerQuickLinks: "ઝડપી લિંક્સ",
+                navContactUs: "અમારો સંપર્ક કરો",
+                footerGetInTouch: "સંપર્કમાં રહો",
+                footerPhone: "ફોન: 9303931226",
+                footerEmail: "ઇમેઇલ: aabhassolankiforwork@gmail.com",
+                callUsBtn: "અમને કૉલ કરો", // For sticky button
+                requestServiceStickyBtn: "સેવા વિનંતી કરો" // New translation for sticky button
+            },
+            mr: {
+                // Navigation
+                siteTitle: "योर व्हेइकल्स केअर",
+                navHome: "मुख्यपृष्ठ",
+                navServices: "सेवा",
+                navInspection: "तपासणी शुल्क",
+                navTeam: "आमची टीम",
+                navJoinUs: "आमच्या टीममध्ये सामील व्हा", // New
+                navContact: "संपर्क",
+                navTerms: "अटी",
+
+                // Hero Section
+                heroHeading: "तज्ञ ऑन-डिमांड वाहन उपाय, आपल्यापर्यंत पोहोचवले",
+                heroSubheading: "विश्वसनीय रोडसाईड सहाय्य आणि मोबाइल मेकॅनिक सेवा. आम्ही त्वरित आणि कार्यक्षम दुरुस्तीसाठी कार्यशाळा आपल्या स्थानावर आणतो。",
+                heroViewServicesBtn: "सेवा पहा",
+                heroRequestServiceBtn: "सेवा विनंती करा",
+                callNowBtn: "आता कॉल करा",
+                whatsappBtn: "व्हॉट्सॲप",
+                contactClickInstruction: "थेट कॉल किंवा मेसेज करण्यासाठी क्लिक करा。",
+
+                // Services Section
+                servicesHeading: "आमच्या व्यावसायिक सेवा",
+                serviceJumpStartTitle: "जंप स्टार्ट",
+                serviceJumpStartDesc: "डेड बॅटरीसाठी त्वरित सहाय्य जेणेकरून आपले वाहन त्वरित आणि सुरक्षितपणे पुन्हा चालू होईल。",
+                serviceFlatTireTitle: "पंचर टायर बदलणे",
+                serviceFlatTireDesc: "आपल्या पंचर किंवा खराब झालेल्या टायरला आपल्या स्पेअर टायरने स्थानावर व्यावसायिक आणि सुरक्षितपणे बदलणे。",
+                serviceFuelDeliveryTitle: "आणीबाणी इंधन वितरण",
+                serviceFuelDeliveryDesc: "इंधन संपत आहे? आम्ही आपल्याला जवळच्या स्टेशनपर्यंत पोहोचवण्यासाठी थेट आपल्या स्थानावर इंधन पोहोचवतो。",
+                serviceDiagnosticsTitle: "इंजन डायग्नोस्टिक्स",
+                serviceDiagnosticsDesc: "चेक इंजिन लाइट आणि इतर कार्यप्रदर्शन समस्यांचे अचूक निदान करण्यासाठी प्रगत साधनांचा वापर करणे。",
+                serviceBatteryTitle: "बॅटरी बदलणे",
+                serviceBatteryDesc: "आपल्या वाहनाच्या वैशिष्ट्यांसाठी योग्य उच्च-गुणवत्तेच्या बॅटरीची पुरवठा आणि स्थापना。",
+                serviceMinorRepairsTitle: "छोटी दुरुस्ती आणि तपासणी",
+                serviceMinorRepairsDesc: "बेल्ट बदलणे, फ्लूइड टॉप-ऑफ, फिल्टर बदलणे आणि मूलभूत तपासणी यासारख्या सामान्य समस्यांना संबोधित करणे。",
+                serviceCarTowingTitle: "कार टोइंग", // New service
+                serviceCarTowingDesc: "ब्रेकडाउन, अपघात, किंवा दुरुस्तीच्या दुकानात वाहतुकीसाठी विश्वसनीय टोइंग सेवा.", // New service
+                serviceBrakeRepairTitle: "ब्रेक प्रणाली दुरुस्ती", // New service
+                serviceBrakeRepairDesc: "इष्टतम थांबण्याच्या शक्तीसाठी ब्रेक पॅड, रोटर्स, कॅलिपर आणि द्रव तपासणी आणि दुरुस्ती.", // New service
+                serviceACHeatingTitle: "ए/सी आणि हीटिंग सेवा", // New service
+                serviceACHeatingDesc: "आरामसाठी आपल्या वाहनाच्या एयर कंडीशनिंग आणि हीटिंग सिस्टम्सचे रिचार्ज, दुरुस्ती आणि देखभाल.", // New service
+                serviceOilFluidChangeTitle: "तेल बदल आणि द्रव तपासणी", // New service
+                serviceOilFluidChangeDesc: "नियमित तेल आणि फिल्टर बदल, तसेच सर्व आवश्यक वाहन द्रव्यांची व्यापक तपासणी आणि टॉप-अप.", // New service
+                servicesDisclaimer: "*सूचीबद्ध सर्व किंमती अंदाजित आहेत आणि विशिष्ट वाहन, स्थान, समस्येची जटिलता, सेवेचा वेळ आणि आवश्यक भागांवर आधारित बदलू शकतात. मूल्यांकनानंतर तपशीलवार कोट प्रदान केला जाईल。",
+
+                // Customer Satisfaction Section
+                satisfactionHeading: "गुणवत्ता सेवा, आनंदी ग्राहक",
+                satisfactionSubtitle: "आपले वाहन, आमची प्राथमिकता",
+                satisfactionDesc: "आम्ही उच्च-गुणवत्तेच्या मोबाइल मेकॅनिक सेवा प्रदान करण्यासाठी वचनबद्ध आहोत जे केवळ आपल्या कारच्या समस्यांना कार्यक्षमतेने दुरुस्त करत नाहीत तर आपल्याला मानसिक शांतता देखील देतात. आमचे कुशल तंत्रज्ञ सुनिश्चित करतात की प्रत्येक दुरुस्ती योग्यरित्या, जागेवर केली जाते, जेणेकरून आपण सुरक्षितपणे आणि आत्मविश्वासाने रस्त्यावर परत येऊ शकता。",
+                satisfactionQuote: "\"जलद, मैत्रीपूर्ण, आणि पहिल्याच वेळी योग्यरित्या दुरुस्त झाले! योर व्हेइकल्स केअरची जोरदार शिफारस करतो!\"", // Added review 1
+                review1Name: "- अंजलि देसाई", // Added Indian reviewer 1 name
+                review2Text: "\"सोयीस्कर आणि विश्वसनीय. कामावर जाताना माझा टायर पंचर झाला होता, आणि त्यांनी तो तिथेच बदलला. मला खूप त्रास वाचला. उत्तम काम!\"", // Added review 2
+                review2Name: "- विक्रम पटेल", // Added Indian reviewer 2 name
+
+                // New Join Us Section
+                joinUsHeading: "आमच्या तज्ञ मेकॅनिक टीममध्ये सामील व्हा!",
+                joinUsSubheading: "तुम्ही नवीन संधी शोधत असलेले कुशल आणि समर्पित मेकॅनिक आहात का? 'योर व्हेइकल्स केअर' सोबत भागीदारी करा आणि तुमच्या परिसरात ऑन-डिमांड वाहन सेवा प्रदान करा.",
+                joinUsButton: "सामील होण्यासाठी अर्ज करा",
+
+                // Contact Section
+                contactHeading: "तात्काळ सहाय्य हवे आहे?",
+                contactSubheading: "आमची टीम आपल्या रोडसाईड आणीबाणी आणि सेवा विनंतींना प्रतिसाद देण्यासाठी 24/7 उपलब्ध आहे。",
+                contactCallLabel: "आम्हाला कधीही कॉल करा:",
+                contactEmailLabel: "आम्हाला ईमेल करें:",
+                contactRequestBtn: "ऑनलाइन सेवा विनंती करा",
+
+                // Social Media Section
+                socialMediaHeading: "आम्हाला फॉलो करा",
+                socialMediaSubheading: "अपडेट्स आणि ऑफरसाठी सोशल मीडिया पर आमच्याशी कनेक्टेड रहा!",
+
+                // Terms and Conditions Section
+                termsHeading: "नियम आणि अटी",
+                termsList: [
+                    // Add translation for each list item if needed, or handle in JS
+                ],
+                termsAgreement: "सेवा विनंतीसह पुढे जाऊन, आपण स्वीकारता की आपण हे नियम आणि अटी वाचल्या आहेत, समजून घेतल्या आहेत आणि त्यांना सहमती दिली आहे。",
+
+                // Footer
+                footerTitle: "योर व्हेइकल्स केअर",
+                footerDescription: "आपल्या स्थानावर थेट व्यावसायिक आणि विश्वसनीय ऑन-डिमांड वाहन दुरुस्ती आणि सहाय्य सेवा प्रदान करणे。",
+                footerCopyright: "© <span id='current-year'></span> योर व्हेइकल्स केअर. सर्व हक्क राखीव。",
+                footerQuickLinks: "त्वरित लिंक",
+                navContactUs: "आमच्याशी संपर्क साधा",
+                footerGetInTouch: "संपर्कात रहा",
+                footerPhone: "फोन: 9303931226",
+                footerEmail: "इमेल: aabhassolankiforwork@gmail.com",
+                callUsBtn: "Call Us", // For sticky button
+                requestServiceStickyBtn: "सेवा विनंती करा" // New translation for sticky button
+            }
+            // Add more languages here
+            /*
+            fr: {
+                // French translations
+            },
+            es: {
+                // Spanish translations
+            }
+            */
+        };
+
         // Array of background image URLs for the hero section slider
         // These images should ideally be 16:9 aspect ratio for the slider.
         const heroImages = [
@@ -2184,6 +2624,63 @@
             });
         }
 
+
+        // Function to set the language
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    // Check if the translation key exists for the current language
+                    element.innerHTML = translations[lang][key]; // Use innerHTML for servedCustomers span
+                } else if (translations.en && translations.en[key]) {
+                    // Fallback to English if translation is missing
+                    element.innerHTML = translations.en[key]; // Use innerHTML for servedCustomers span
+                }
+            });
+
+            // Update review names based on current language
+            const reviewElements = document.querySelectorAll('.customer-review-card .reviewer-name');
+            reviewElements.forEach((element, index) => {
+                const key = `review${index + 1}Name`;
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                } else if (translations.en && translations.en[key]) {
+                    element.textContent = translations.en[key]; // Fallback to English
+                }
+            });
+
+            // Update the lang attribute of the html tag for accessibility and SEO
+            document.documentElement.lang = lang;
+
+            // Store the selected language in local storage
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
+        // Function to position the mobile language selector below the hamburger button
+        function positionMobileLanguageSelector() {
+            const mobileMenuButton = document.querySelector('.mobile-menu-container .mobile-menu-button');
+            const mobileLangSelector = document.querySelector('.language-selector-mobile');
+
+            // Only position if both elements exist and we are on a mobile screen (based on CSS media query breakpoint)
+            if (mobileMenuButton && mobileLangSelector && window.innerWidth <= 768) {
+                const buttonRect = mobileMenuButton.getBoundingClientRect();
+                const headerRect = document.querySelector('header').getBoundingClientRect();
+                const headerContainer = document.querySelector('header .container');
+                const paddingRight = parseFloat(window.getComputedStyle(headerContainer).paddingRight);
+
+                // Position the language selector just below the hamburger button
+                mobileLangSelector.style.top = `${buttonRect.bottom + 5}px`; // 5px gap below button
+                // Align the right edge of the language selector with the right edge of the button
+                mobileLangSelector.style.right = `${paddingRight}px`;
+                mobileLangSelector.style.display = 'block'; // Ensure it's visible on mobile
+            } else if (mobileLangSelector) {
+                // Hide the mobile language selector on desktop
+                mobileLangSelector.style.display = 'none';
+            }
+        }
+
+
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize AOS (Animate On Scroll)
@@ -2220,6 +2717,36 @@
                     }
                 });
             });
+
+            // Language switcher logic
+            const languageSelectDesktop = document.getElementById('language-select-desktop');
+            const languageSelectMobile = document.getElementById('language-select-mobile');
+
+            // Load saved language from local storage, or default to English
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+            languageSelectDesktop.value = savedLanguage;
+            languageSelectMobile.value = savedLanguage;
+
+            // Set initial language on page load
+            setLanguage(savedLanguage);
+
+            // Add event listeners for language change and sync
+            languageSelectDesktop.addEventListener('change', (event) => {
+                languageSelectMobile.value = event.target.value; // Sync mobile
+                setLanguage(event.target.value); // Update content
+            });
+
+            languageSelectMobile.addEventListener('change', (event) => {
+                languageSelectDesktop.value = event.target.value; // Sync desktop
+                setLanguage(event.target.value); // Update content
+            });
+
+
+            // Header Scroll Logic for background change - Removed the logic that adds/removes 'scrolled' class
+            // The header background is now static blue via CSS
+            // Trigger scroll event on load to check initial position (still useful for shadow)
+            window.dispatchEvent(new Event('scroll'));
+
 
             // Initialize Hero Swiper Slider
             initializeHeroSwiper(heroImages, 5000); // Auto-slide every 5 seconds
@@ -2262,110 +2789,9 @@
                 checkGesture();
             });
 
-
-            // Gemini API Integration - AI Assistant Logic
-            const issueDescriptionTextarea = document.getElementById('issue-description');
-            const getDiagnosisBtn = document.getElementById('get-diagnosis-btn');
-            const loadingIndicator = document.getElementById('loading-indicator');
-            const responseArea = document.getElementById('response-area');
-            const diagnosisContent = document.getElementById('diagnosis-content');
-
-            getDiagnosisBtn.addEventListener('click', async () => {
-                const userIssue = issueDescriptionTextarea.value.trim();
-                if (!userIssue) {
-                    diagnosisContent.innerHTML = '<p class="text-red-500">Please describe your car issue before getting a diagnosis.</p>';
-                    responseArea.classList.remove('hidden');
-                    return;
-                }
-
-                // Show loading indicator, hide previous response
-                loadingIndicator.style.display = 'block';
-                responseArea.classList.add('hidden');
-                diagnosisContent.innerHTML = ''; // Clear previous content
-
-                try {
-                    // Define the services available from your website for the LLM to recommend
-                    const availableServices = [
-                        "Jump Start",
-                        "Flat Tire Change",
-                        "Emergency Fuel Delivery",
-                        "Engine Diagnostics",
-                        "Battery Replacement",
-                        "Minor Repairs & Checks",
-                        "Car Towing",
-                        "Brake System Repair",
-                        "A/C & Heating Service",
-                        "Oil Change & Fluid Check"
-                    ];
-
-                    // Construct the prompt for the Gemini API
-                    const prompt = `Analyze the following car problem described by a user. Provide a concise potential diagnosis, some general and safe troubleshooting tips, and recommend relevant services from the provided list that 'Your Vehicles Care' offers. Format the output in Markdown with clear headings for 'Potential Diagnosis', 'Troubleshooting Tips', and 'Recommended Services'.
-
-User's car problem: "${userIssue}"
-
-Available 'Your Vehicles Care' services: ${availableServices.join(', ')}
-
-Please provide the output in English.`;
-
-
-                    let chatHistory = [];
-                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                    const payload = { contents: chatHistory };
-                    const apiKey = ""; // Leave as-is; Canvas will provide this in runtime.
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    const result = await response.json();
-
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                        const aiResponseText = result.candidates[0].content.parts[0].text;
-                        diagnosisContent.innerHTML = parseMarkdownToHtml(aiResponseText);
-                    } else {
-                        diagnosisContent.innerHTML = '<p class="text-red-500">Sorry, I could not generate a diagnosis. Please try again later.</p>';
-                        console.error('Gemini API response structure unexpected:', result);
-                    }
-
-                } catch (error) {
-                    diagnosisContent.innerHTML = '<p class="text-red-500">An error occurred while fetching diagnosis. Please check your network or try again later.</p>';
-                    console.error('Error calling Gemini API:', error);
-                } finally {
-                    loadingIndicator.style.display = 'none';
-                    responseArea.classList.remove('hidden');
-                }
-            });
-
-            // Helper function to parse simple markdown to HTML
-            function parseMarkdownToHtml(markdown) {
-                let html = markdown
-                    .replace(/^### (.*$)/gim, '<h3>$1</h3>') // H3
-                    .replace(/^## (.*$)/gim, '<h2>$1</h2>')   // H2
-                    .replace(/^# (.*$)/gim, '<h1>$1</h1>')    // H1
-                    .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>') // Bold
-                    .replace(/\*(.*?)\*/gim, '<em>$1</em>')     // Italic
-                    .replace(/^- (.*$)/gim, '<li>$1</li>');    // List items
-
-                // Wrap list items in ul if not already
-                if (html.includes('<li>') && !html.includes('<ul>')) {
-                    html = '<ul>' + html + '</ul>';
-                }
-
-                // Add line breaks for paragraphs
-                html = html.split('\n').map(line => {
-                    if (line.startsWith('<h1>') || line.startsWith('<h2>') || line.startsWith('<h3>') || line.startsWith('<ul>') || line.startsWith('<li>') || line.trim() === '') {
-                        return line;
-                    }
-                    return `<p>${line}</p>`;
-                }).join('');
-
-                return html;
-            }
+            // Position mobile language selector on load and resize
+            positionMobileLanguageSelector();
+            window.addEventListener('resize', positionMobileLanguageSelector);
         });
     </script>
 </body>
